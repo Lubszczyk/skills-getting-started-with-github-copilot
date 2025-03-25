@@ -25,8 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
-          <p><strong>Participants:</strong> ${details.participants.join(", ") || "None"}</p>
         `;
+
+        // Append participant info
+        activityCard.appendChild(displayParticipantInfo(details.participants));
 
         activitiesList.appendChild(activityCard);
 
@@ -40,6 +42,19 @@ document.addEventListener("DOMContentLoaded", () => {
       activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
       console.error("Error fetching activities:", error);
     }
+  }
+
+  // Function to display participant info
+  function displayParticipantInfo(participants) {
+    const participantInfo = document.createElement("div");
+    participantInfo.className = "participant-info";
+
+    participantInfo.innerHTML = `
+      <h4>Participants</h4>
+      <p><strong>List:</strong> ${participants.join(", ") || "None"}</p>
+    `;
+
+    return participantInfo;
   }
 
   // Handle form submission
