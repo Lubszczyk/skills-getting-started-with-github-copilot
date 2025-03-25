@@ -27,6 +27,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
         `;
 
+        // Append participant info
+        activityCard.appendChild(displayParticipantInfo(details.participants));
+
         activitiesList.appendChild(activityCard);
 
         // Add option to select dropdown
@@ -39,6 +42,19 @@ document.addEventListener("DOMContentLoaded", () => {
       activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
       console.error("Error fetching activities:", error);
     }
+  }
+
+  // Function to display participant info
+  function displayParticipantInfo(participants) {
+    const participantInfo = document.createElement("div");
+    participantInfo.className = "participant-info";
+
+    participantInfo.innerHTML = `
+      <h4>Participants</h4>
+      <p><strong>List:</strong> ${participants.join(", ") || "None"}</p>
+    `;
+
+    return participantInfo;
   }
 
   // Handle form submission
